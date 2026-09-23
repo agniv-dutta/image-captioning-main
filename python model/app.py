@@ -13,15 +13,17 @@ from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app)
-tokenizer = CaptionReader('kaggle/captions.txt').get_tokenizer()
-model = load_model('CL_FD_MODEL_V2.keras')
+tokenizer = CaptionReader('captions.txt').get_tokenizer()
+model = load_model('IC_MODEL.keras')
+
+# Initialize VGG16 model globally to avoid repeated downloads
+vgg_base = VGG16()
+vgg_model = Model(inputs=vgg_base.inputs,
+                  outputs=vgg_base.layers[-2].output)
 
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    vgg_model = VGG16()
-    vgg_model = Model(inputs=vgg_model.inputs,
-                      outputs=vgg_model.layers[-2].output)
     file = request.files['file']
     if file:
         img = Image.open(io.BytesIO(file.read()))
