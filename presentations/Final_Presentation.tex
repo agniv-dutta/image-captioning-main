@@ -1,0 +1,133 @@
+\documentclass{beamer}
+\usetheme{Madrid}
+\usecolortheme{default}
+
+\title[Final Presentation]
+{Image Captioning}
+
+\subtitle{Team - The Scalars}
+
+\author[Ishita, Raina, Saee, Sania, Urja]
+{Team members :-}
+
+\institute[]
+{
+    Ishita Gupta\\
+    Raina Dsouza\\
+    Saee Bachute\\
+    Sania Valiyani\\
+    Urja Tendolkar\\
+}
+
+\definecolor{uoftblue}{RGB}{6,41,88}
+\setbeamercolor{titlelike}{bg=uoftblue}
+\setbeamerfont{title}{series=\bfseries}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}
+\frametitle{Objective}
+The objective of our project was to develop an image captioning website that generates a one-line decription when a pictuure is uplaoded. 
+\end{frame}
+
+\begin{frame}
+\frametitle{Tech Stacks}
+\begin{itemize}
+    \item Python 
+    \begin{itemize}
+        \item TensorFlow
+        \item VGG16 model
+        \item Inception model (GoogleNet)
+    \end{itemize}
+    \item Frotend 
+    \begin{itemize}
+        \item React
+        \item Tailwind
+        \item Email JS
+    \end{itemize}
+    \item Backend 
+    \begin{itemize}
+        \item Flask
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Timeline Chart}
+\begin{figure}
+    \centring
+    \includegraphics[width=0.8\linewidth]{Timeline.jpg}
+    \label{fig:enter-label}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Model Explanation}
+\textbf{VGG16 (Visual Geometry Group 16)}
+
+1) VGG16 achieved 92.7\% top-5 test accuracy on the ImageNet dataset. \\
+2) Depth: VGG-16 has 16 layers, including 13 convolutional layers and 3 fully connceted layers. \\ 
+3) Uniformity: All convolutional layers use a small filter size (3x3) with a stride of 1 and same-padding
+\end{frame}
+
+\begin{frame}
+    \frametitle[Model Explanation]
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.6\linewidth]{Comparision.jpg}
+        \label{fig:enter-label}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Block diagram of model}
+\begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{Block diagram.jpg}
+    \label{fig:enter-label}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Learnings}
+\begin{itemize}
+    \item Explored topics in machine learning, deep learning, and natural language processing.
+    \item Learnt about different pre-trained models and their differences.
+    \item Learned how to integrate frontend and backend.
+    \item Cooperation with teammates, used Git, and learned how to debug Git errors.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Challanges}
+Challanges faced by us were :-
+\begin{itemize}
+    \item Faced several Git issues
+    \item Improper format of CSV files
+    \item Memory issues and speed constraints (absence of GPU)
+    \item Integration of fontend and backend
+    \item Overfitting and inaccurate BLEU scores
+    \item Implemenation of model with Scala
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Future Scope}
+\begin{enumerate}
+    \item Model Enhancement
+    \begin{itemize}
+        \item Attention Mechanism
+        \item Data Augmentation
+        \item Beam Search
+    \end{itemize}
+    \item Documentation
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\centering{\huge{\textbf{Thank You !}}}
+\end{frame}
+
+\end{document}

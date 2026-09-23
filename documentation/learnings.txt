@@ -1,0 +1,36 @@
+Day 1:
+Learnt the Pandas Dataframe
+
+Learnt Machine Learning Concepts:
+Linear Regression and Logistic Regression, Naive Bayes, Dummy Variables and One Hot Encoding, Decision Tree, etc.
+
+Day 2:
+Learnt Deep Learning Concepts:
+PyTorch, Tensorflow, Keras, Loss & Cost Function, Gradient Descent for Neural Network, CNN, LSTM, etc.
+
+Day 3:
+Learnt NLP concepts:
+Regex, Tokenization in Spacy, Language Processing Pipeline, Stemming and Lemmatization, Word vectors in Spacy, etc.
+
+Day 4:
+Pre-processing of dataset.
+
+Day 5:
+Making the CNN-LSTM Python model.
+
+Day 6:
+Testing and Debugging of the Python model.
+Saving and Loading the model.
+
+Day 7:
+Learning Scala basics.
+
+Day 8: 
+Loading the model in Flask. Starting with React.
+Learning Scala
+
+Day 9:
+Learning Scala
+
+Day 10:
+Learning Scala. Faced difficulty in pushing the pickle file as it is too large. Tried pushing with Git LFS but the problem still persists.
