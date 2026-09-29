@@ -21,12 +21,6 @@ const Navbar = () => {
                         className="hover:text-white hover:underline hover:underline-offset-4 cursor-pointer duration-300 transition-all text-lg font-semibold"
                     >Model</Link>
                     <Link
-                        to="about"
-                        smooth
-                        duration={400}
-                        className="hover:text-white hover:underline hover:underline-offset-4 cursor-pointer duration-300 transition-all text-lg font-semibold"
-                    >About Us</Link>
-                    <Link
                         to="contact"
                         smooth
                         duration={400}

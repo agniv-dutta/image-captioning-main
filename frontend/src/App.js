@@ -1,5 +1,4 @@
 
-import AboutPage from './components/AboutPage';
 import ContactPage from './components/ContactPage';
 import HomePage from './components/HomePage';
 import ModelPage from './components/ModelPage';
@@ -14,9 +13,6 @@ function App() {
       </Element>
       <Element name="model">
         <ModelPage />
-      </Element>
-      <Element name="about">
-        <AboutPage />
       </Element>
       <Element name="contact">
         <ContactPage />
