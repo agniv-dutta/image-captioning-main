@@ -1,6 +1,10 @@
-tensorflow>=2.0.0
-flask>=2.0.0
-flask-cors>=3.0.0
-pillow>=8.0.0
-numpy>=1.19.0
+tensorflow-cpu==2.16.2; sys_platform == "win32"
+tensorflow==2.16.2; sys_platform != "win32"
+keras==3.4.1
+numpy==1.26.4
+h5py>=3.10.0
+flask>=3.0.0
+flask-cors>=4.0.0
+pillow>=10.0.0
 tqdm>=4.60.0
+nltk==3.9.2

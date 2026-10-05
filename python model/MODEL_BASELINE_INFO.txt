@@ -1,0 +1,149 @@
+==============================================================================
+MODEL_BASELINE_INFO - READ-ONLY AUDIT
+==============================================================================
+generated            : prompt 1 (read-only audit)
+tensorflow           : 2.16.2
+keras                : 3.4.1
+python               : 3.11.9
+
+No model, dataset or notebook file was modified, moved, renamed or deleted.
+
+==============================================================================
+1. IC_MODEL.keras  (PROTECTED - MUST REMAIN UNCHANGED)
+==============================================================================
+path                 : python model/IC_MODEL.keras
+SHA256               : 9EB4F9F257D36B4CD80D3CEA1F1A29445597D1B889162FF23148A5D4AA9006A4
+expected SHA256      : 9EB4F9F257D36B4CD80D3CEA1F1A29445597D1B889162FF23148A5D4AA9006A4
+SHA256 match         : True
+file size            : 71,960,560 bytes (68.63 MiB)
+Keras format         : .keras v3 archive (zip container)
+archive members      : 3
+  - config.json
+  - metadata.json
+  - model.weights.h5
+
+Keras object type    : Functional
+internal name        : functional_3
+total params         : 5,992,741
+trainable params     : 5,992,741
+non-trainable params : 0
+weight tensors       : 10
+
+input shapes         :
+  image        (None, 4096)
+  text         (None, 35)
+output shape         :
+  keras_tensor_20 (None, 8485)
+
+output/vocabulary dim: 8,485
+embedding layer      : embedding_1  input_dim=8485 output_dim=256
+vocab consistency   : embedding.input_dim == outputs.shape[-1] -> True
+
+architecture (layer-by-layer):
+  #   layer                              type             output shape
+  --- ---------------------------------- ---------------- --------------------
+  0   text                               InputLayer       (None, 35)
+  1   image                              InputLayer       (None, 4096)
+  2   embedding_1                        Embedding        (None, 35, 256)
+  3   dropout_2                          Dropout          (None, 4096)
+  4   dropout_3                          Dropout          (None, 35, 256)
+  5   dense_3                            Dense            (None, 256)
+  6   lstm_1                             LSTM             (None, 256)
+  7   add_1                              Add              (None, 256)
+  8   dense_4                            Dense            (None, 256)
+  9   dense_5                            Dense            (None, 8485)
+
+==============================================================================
+2. COMPARISON: CL_FD_MODEL_V2.keras  vs  IC_MODEL.keras
+==============================================================================
+
+2a. On-disk form
+------------------------------------------------------------------------------
+path                 : CL_FD_MODEL_V2.keras   (repo ROOT, not python model/)
+CL_FD_MODEL_V2.keras  : DIRECTORY (unpacked Keras 3 SavedModel)
+    config.json                     8,799 bytes  sha256=78CFB552C4D3F1788E23A82D1664A9C1...
+    metadata.json                      63 bytes  sha256=EC1508CB9754A6B297ED374CDD0E22F8...
+    model.weights.h5           71,951,368 bytes  sha256=CDE3B232FD6B5C9E098B5CBFBDCD6381...
+
+  => 'CL_FD_MODEL_V2.keras' has a .keras-looking NAME but is a DIRECTORY.
+     It is not a single-file .keras archive like IC_MODEL.keras.
+
+2b. Architecture comparison (config.json)
+------------------------------------------------------------------------------
+IC  class_name       : Functional   layers=11
+CL  class_name       : Functional   layers=11
+config.json identical: True
+layer signature equal: True
+
+  #   IC layer               class          CL layer               class          same
+  0   text                   InputLayer     text                   InputLayer     True
+  1   image                  InputLayer     image                  InputLayer     True
+  2   embedding_1            Embedding      embedding_1            Embedding      True
+  3   dropout_2              Dropout        dropout_2              Dropout        True
+  4   dropout_3              Dropout        dropout_3              Dropout        True
+  5   not_equal_1            NotEqual       not_equal_1            NotEqual       True
+  6   dense_3                Dense          dense_3                Dense          True
+  7   lstm_1                 LSTM           lstm_1                 LSTM           True
+  8   add_1                  Add            add_1                  Add            True
+  9   dense_4                Dense          dense_4                Dense          True
+  10  dense_5                Dense          dense_5                Dense          True
+
+2c. Weight-by-weight comparison (HDF5 tensors)
+------------------------------------------------------------------------------
+IC tensors           : 32
+CL tensors           : 32
+only in IC           : 0
+only in CL           : 0
+model.weights.h5 size: IC 71,951,368 bytes
+                       CL 71,951,368 bytes
+bit-identical       : 32/32
+max abs diff        : 0.000000e+00
+
+VERDICT: CL_FD_MODEL_V2.keras IS THE SAME TRAINED MODEL AS IC_MODEL.keras.
+         Every layer name, every tensor path, every shape and every value
+         matches exactly (max abs diff = 0). The ONLY difference is the
+         container: IC_MODEL is a single .keras file, CL_FD_MODEL_V2 is
+         the unpacked directory form of the same save.
+         => Substituting CL_FD for IC would change NOTHING and would
+            silently reintroduce the same corrupted-tokenizer defect.
+
+==============================================================================
+3. OTHER MODEL ASSETS INSPECTED
+==============================================================================
+  30kmodel/30k_model.ipynb                              26,132,806 bytes
+
+  30kmodel is a SEPARATE Flickr30k experiment:
+    - InceptionV3 / GoogLeNet, not VGG16
+    - 2048-d features, not 4096-d
+    - 299x299 input, not 224x224
+  => INCOMPATIBLE with IC_MODEL.keras (4096-d input). Not a substitute.
+
+==============================================================================
+4. VERDICT
+==============================================================================
+IC_MODEL.keras integrity   : UNCHANGED (SHA256 verified)
+Output/vocabulary dimension: 8,485
+Architecture                : VGG16 fc2 (4096) + Embedding(vocab,256) + LSTM(256)
+
+The filename difference between IC_MODEL.keras and CL_FD_MODEL_V2.keras does
+NOT by itself imply different trained weights; the comparison above is the
+evidence. CL_FD_MODEL_V2 is a directory, so it cannot be dropped in as a
+drop-in .keras file regardless.
+
+Historical notebook records for IC_MODEL.keras:
+  all_captions            = 40,455
+  vocab_size              = 8,485   (== output dim, confirms tokenizer mapping)
+  max_length              = 35      (== text input dim)
+  epochs                  = 50
+  loss                    = 5.7976 -> 1.7049
+  BLEU-1                  = 0.513414
+  BLEU-2                  = 0.290109
+  sample caption          = startseq woman rides bike down rocky path endseq
+
+==============================================================================
+MODEL_STATUS = KEEP
+==============================================================================
+Reason: weights are intact and internally consistent (embedding input_dim
+equals the 8,485 output classes, and the input dims match the documented
+4096-d VGG16 fc2 / 35-token sequence contract). The known defect is the
+word-index mapping used at inference time, not the weights.

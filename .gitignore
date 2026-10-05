@@ -16,6 +16,10 @@ frontend/.cache/
 python model/features.zip
 python model/static/uploads/*
 
+# Duplicate of IC_MODEL.keras (verified bit-identical weights, unpacked dir form).
+# The canonical tracked checkpoint is python model/IC_MODEL.keras.
+CL_FD_MODEL_V2.keras/
+
 # Local environment and editor files
 .env
 .env.*

@@ -1,0 +1,188 @@
+==============================================================================
+BLEU EVALUATION OF THE EXISTING IMAGE CAPTIONING MODEL
+run at            : 2026-10-05 09:54:02
+model file       : C:\Users\Agniv Dutta\image-captioning-main\python model\IC_MODEL.keras
+==============================================================================
+1. LOAD EXISTING MODEL (read-only, never re-saved)
+   sha256 before eval : 9eb4f9f257d36b4cd80d3cea1f1a29445597d1b889162ff23148a5d4aa9006a4
+   matches baseline   : True
+   class              : Functional (functional_3)
+   input shapes       : [(None, 4096), (None, 35)]
+   output shape       : (None, 8485)
+   weights modified   : NO  (this script never calls model.save)
+
+2. TOKENIZER (reused as-is, NOT rebuilt from any other corpus)
+   corpus            : C:\Users\Agniv Dutta\image-captioning-main\python model\captions.txt
+   len(word_index)   : 5464
+   vocab_size (=+1)  : 5465
+   model needs       : 8485 classes
+   MISMATCH          : 3020 output classes have no word
+   -> any argmax landing in that range makes idx_to_word() return None and
+      STOPS decoding early. Cause: captions.txt is truncated (dataset damage).
+
+3. max_length
+   read from model input_shape : 35
+   matches notebook len_max=35 : True
+
+4. TEST SET (py_model.ipynb split rule: image_ids=list(mapping.keys()), 90/10)
+   mapping keys      : 3191
+   split index       : 2871
+   train keys        : 2871
+   test keys         : 320
+   CAVEAT: the original 90/10 boundary cannot be recovered, because the
+   surviving key set (3,191) is not the training-time key set (~8,091).
+   The rule above is re-applied to the surviving data, so it is a faithful
+   but APPROXIMATE reconstruction of the notebook test split.
+
+   --- screening the DEFINED TEST SET ---
+   test keys            : 320
+     excluded (no image file) : 1
+     excluded (zero-byte file) : 319
+   USABLE TEST IMAGES   : 0
+
+   --- screening the TRAIN half (for comparison) ---
+   train keys           : 2871
+     excluded (zero-byte file) : 2482
+   usable train images  : 389
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+*** THE DEFINED TEST SET CONTAINS ZERO EVALUABLE IMAGES ***
+*** Every test-split image is either zero-byte or absent, so a valid
+*** held-out BLEU score CANNOT be computed. Proceeding instead with the
+*** usable TRAIN images, labelled explicitly below.
+*** THESE BLEU SCORES MEASURE TRAINING-SET FIT, NOT GENERALISATION.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+5. GENERATE CAPTIONS
+   images to evaluate : 389
+   extracting VGG16 fc2 features (batched) ...
+   feature matrix     : (389, 4096)
+   25/389  (51s)
+   50/389  (95s)
+   75/389  (144s)
+   100/389  (181s)
+   125/389  (221s)
+   150/389  (261s)
+   175/389  (306s)
+   200/389  (340s)
+   225/389  (375s)
+   250/389  (417s)
+   275/389  (468s)
+   300/389  (514s)
+   325/389  (614s)
+   350/389  (651s)
+   375/389  (698s)
+   389/389  (728s)
+   captions generated : 389
+   empty predictions  : 0
+   TRUNCATED by unmapped-token early stop : 2  (0.5%)
+
+6. BLEU SCORES (nltk corpus_bleu; startseq/endseq stripped from BOTH sides)
+   BLEU-1 : nltk=0.302159   independent=0.302159   agree=True
+   BLEU-2 : nltk=0.107995   independent=0.107995   agree=True
+   BLEU-3 : nltk=0.020670   independent=0.020670   agree=True
+   BLEU-4 : nltk=0.000000   independent=0.000000   agree=True
+   independent check agrees on all four : True
+   per-order modified precision : p1=0.303582 p2=0.038780 p3=0.000761 p4=0.000000
+   total hypothesis length : 3406   total reference length : 3422   BP = 0.995313
+
+7. TEN EXAMPLE PREDICTIONS
+
+   [1] 1000268201_693b08cb0e.jpg
+        REF : child in pink dress is climbing up set of stairs in an entry way
+        REF : girl going into wooden building
+        REF : little girl climbing into wooden playhouse
+        REF : little girl climbing the stairs to her playhouse
+        REF : little girl in pink dress going into wooden cabin
+        PRED: to is outfit child bat on the bat
+
+   [2] 1001773457_577c3a7d70.jpg
+        REF : black dog and spotted dog are fighting
+        REF : black dog and tri-colored dog playing with each other on the road
+        REF : black dog and white dog with brown spots are staring at each other in the street
+        REF : two dogs of different breeds looking at each other on the road
+        REF : two dogs on pavement moving toward each other
+        PRED: two dogs girl people with crowd play in the ball
+
+   [3] 1002674143_1b742ab4b8.jpg
+        REF : little girl covered in paint sits in front of painted rainbow with her hands in bowl
+        REF : little girl is sitting in front of large painted rainbow
+        REF : small girl in the grass plays with fingerpaints in front of white canvas with rainbow on it
+        REF : there is girl with pigtails sitting in front of rainbow painting
+        REF : young girl with pigtails painting outside in the grass
+        PRED: grass wearing in other path is snow on the standing with speedboat in three of beach
+
+   [4] 1003163366_44323f5815.jpg
+        REF : man lays on bench while his dog sits by him
+        REF : man lays on the bench to which white dog is also tied
+        REF : man sleeping on bench outside with white and black dog sitting next to him
+        REF : shirtless man lies on park bench with his dog
+        REF : man laying on bench holding leash of dog sitting on ground
+        PRED: man kissing on together in grassy
+
+   [5] 1007129816_e794419615.jpg
+        REF : man in an orange hat starring at something
+        REF : man wears an orange hat and glasses
+        REF : man with gauges and glasses is wearing blitz hat
+        REF : man with glasses is wearing beer can crocheted hat
+        REF : the man with pierced ears is wearing glasses and an orange hat
+        PRED: man with emblems dog cap is water peirced riding
+
+   [6] 1007320043_627395c3d8.jpg
+        REF : child playing on rope net
+        REF : little girl climbing on red roping
+        REF : little girl in pink climbs rope bridge at the park
+        REF : small child grips onto the red ropes at the playground
+        REF : the small child climbs on red ropes on playground
+        PRED: small in brown playing snow on shore racetrack
+
+   [7] 1009434119_febe49276a.jpg
+        REF : black and white dog is running in grassy garden surrounded by white fence
+        REF : black and white dog is running through the grass
+        REF : boston terrier is running in the grass
+        REF : boston terrier is running on lush green grass in front of white fence
+        REF : dog runs on the green grass near wooden fence
+        PRED: canal spots is little on the standing
+
+   [8] 1012212859_01547e3f17.jpg
+        REF : "a dog shakes its head near the shore red ball next to it ."
+        REF : white dog shakes on the edge of beach with an orange ball
+        REF : "dog with orange ball at feet stands on shore shaking off water"
+        REF : white dog playing with red ball on the shore near the water
+        REF : white dog with brown ears standing near water with head turned to one side
+        PRED: and another through the at
+
+   [9] 1015118661_980735411b.jpg
+        REF : boy smiles in front of stony wall in city
+        REF : little boy is standing on the street while man in overalls is working on stone wall
+        REF : young boy runs aross the street
+        REF : young child is walking on stone paved street with metal pole and man behind him
+        REF : smiling boy in white shirt and blue jeans in front of rock wall with man in overalls behind him
+        PRED: white in brown short is a on the jumps walking swing
+
+   [10] 1015584366_dfcec3c85a.jpg
+        REF : black dog leaps over log
+        REF : grey dog is leaping over fallen tree
+        REF : large black dog leaps fallen log
+        REF : mottled black and grey dog in blue collar jumping over fallen tree
+        REF : the black dog jumped the tree stump
+        PRED: decorate black dog blue and is sitting field faces in the them
+
+==============================================================================
+SUMMARY
+==============================================================================
+Number of test images evaluated : 389
+Evaluation set                  : TRAIN images (NOT a held-out test set)
+BLEU-1                          : 0.302159
+BLEU-2                          : 0.107995
+BLEU-3                          : 0.020670
+BLEU-4                          : 0.000000
+
+INTERPRETATION GUARDRAILS
+ - These scores are computed on TRAINING images. They measure how well the
+   model fits data it was trained on. They are NOT a generalisation estimate.
+ - The notebook-defined held-out split yielded 0 usable images, so no valid
+   held-out BLEU can be reported from the surviving dataset at all.
+ - Tokenizer is short by 3020 classes; 2 predictions were cut short by an unmapped token.
+ - Model file was opened read-only; sha256 verified unchanged.
+==============================================================================

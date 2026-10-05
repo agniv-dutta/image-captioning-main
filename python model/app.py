@@ -34,8 +34,9 @@ def predict():
         image = preprocess_input(img)
         try:
             features = vgg_model.predict(image)
-        except UnicodeEncodeError as e:
-            print(e)
+        except Exception:
+            app.logger.exception('VGG16 feature extraction failed')
+            return jsonify({'result': 'error processing image'}), 500
         text = predict_caption(model, features, tokenizer)
         text = " ".join(text.split(" ")[1:-1])
         return jsonify({'result': text})
