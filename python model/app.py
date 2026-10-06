@@ -24,24 +24,30 @@ vgg_model = Model(inputs=vgg_base.inputs,
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    file = request.files['file']
-    if file:
+    file = request.files.get('file')
+    if file is None or file.filename == '':
+        return jsonify({'error': 'no image file provided'}), 400
+
+    try:
         img = Image.open(io.BytesIO(file.read()))
+        img.load()
         img = img.resize((224, 224))
         img = img.convert('RGB')
-        img = np.array(img)
-        img = img.reshape((1, 224, 224, 3))
-        image = preprocess_input(img)
-        try:
-            features = vgg_model.predict(image)
-        except Exception:
-            app.logger.exception('VGG16 feature extraction failed')
-            return jsonify({'result': 'error processing image'}), 500
-        text = predict_caption(model, features, tokenizer)
-        text = " ".join(text.split(" ")[1:-1])
-        return jsonify({'result': text})
+    except Exception:
+        app.logger.exception('could not decode uploaded image')
+        return jsonify({'error': 'not a valid image'}), 400
 
-    return jsonify({'result': 'not a valid image'})
+    img = np.array(img)
+    img = img.reshape((1, 224, 224, 3))
+    image = preprocess_input(img)
+    try:
+        features = vgg_model.predict(image)
+    except Exception:
+        app.logger.exception('VGG16 feature extraction failed')
+        return jsonify({'error': 'error processing image'}), 500
+    text = predict_caption(model, features, tokenizer)
+    text = " ".join(text.split(" ")[1:-1])
+    return jsonify({'result': text})
 
 
 def idx_to_word(integer, tokenizer):
@@ -68,4 +74,4 @@ def predict_caption(model, image, tokenizer, max_length=35):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, use_reloader=False)
