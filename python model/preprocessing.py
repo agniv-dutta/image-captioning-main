@@ -82,6 +82,9 @@ for key in mapping:
     for caption in mapping[key]:
         all_captions.append(caption)
 
+
+        
+
 tokenizer = Tokenizer()
 tokenizer.fit_on_texts(all_captions)
 vocab_size = len(tokenizer.word_index) + 1
