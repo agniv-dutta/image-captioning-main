@@ -34,16 +34,6 @@ This project aims to generate descriptive captions for images using deep learnin
 
 ![BLEUSCORE](presentations/model_bleuscore.jpg)
 
-## Contributions
-#### <b>Team members:<br></b>
 
-Raina Dsouza: Model Training<br>
-Ishita Gupta: Backend using Flask<br>
-Urja Tendolkar: Model Training<br>
-Saee Bachute: Data Cleaning and Preprocessing <br>
-Sania Valiyani: Frontend using Tailwind <br>
 
-## Acknowledgements
-- This project is a part of the WE Program Project 1.
-- Special thanks to our mentors for their support and guidance in helping us make this project.
-- Contributions are welcome! Please fork this repository and submit a pull request for any enhancements or bug fixes.
+
